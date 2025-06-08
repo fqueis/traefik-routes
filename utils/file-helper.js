@@ -5,13 +5,14 @@ const path = require("path");
 const yaml = require("js-yaml");
 
 const TRAEFIK_ROUTES_PATH = process.env.TRAEFIK_ROUTES_PATH;
+const SESSION_DOMAIN = process.env.SESSION_DOMAIN;
 
 const writeRouteFile = (subdomain, targetIp) => {
   const config = {
     http: {
       routers: {
         [`${subdomain}-router`]: {
-          rule: `Host(\`${subdomain}.session.lyk0z.click\`)`,
+          rule: `Host(\`${subdomain}.${SESSION_DOMAIN}\`)`,
           entryPoints: ["websecure"],
           service: `${subdomain}-service`,
           tls: { certResolver: "letsencrypt" },
