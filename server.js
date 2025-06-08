@@ -32,6 +32,11 @@ const run = async () => {
     process.exit(1);
   }
 
+  if (!process.env.SESSION_DOMAIN) {
+    console.error("Error: SESSION_DOMAIN environment variable is not set.");
+    process.exit(1);
+  }
+
   fastify.listen(
     { host: "0.0.0.0", port: process.env.FASTIFY_PORT || 3000 },
     (err) => {
