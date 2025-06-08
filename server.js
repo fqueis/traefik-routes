@@ -47,6 +47,7 @@ const run = async () => {
     }
   );
 
+  fastify.register(autoload, { dir: path.join(__dirname, "plugins") });
   fastify.register(autoload, {
     dir: path.join(__dirname, "routes"),
     options: { prefix: "/api/v1" },
